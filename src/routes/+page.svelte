@@ -1,16 +1,20 @@
 <script lang="ts">
-	import Permissions from "../components/permissions.svelte";
+import Permissions from "../components/permissions.svelte";
 import Role from "../components/role.svelte";
 
-  let isOpen = false;
-  
-  function open() {
-    isOpen = true;  
-  }
+let isOpen = false;
+
+function openPermModal() {
+  isOpen = true;  
+}
+
+function handleClose() {
+  isOpen = false;
+}
 </script>
 
 <div class="role-list">
-  <Role on:click={open}/>
+  <Role on:click={openPermModal}/>
   <Role />
   <Role />
   <Role />
@@ -23,9 +27,10 @@ import Role from "../components/role.svelte";
 
 user
 
-{#if isOpen}
-  <Permissions />
-{/if}
+<Permissions
+  isOpen={isOpen}
+  on:close={handleClose}
+/>
 
 <style>
 .role-list {
